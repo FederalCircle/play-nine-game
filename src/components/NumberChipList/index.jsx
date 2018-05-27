@@ -22,9 +22,14 @@ function numberChipList(props) {
   return (
     <div className="NumberChipList">
       <Card>
-        <Grid container alignItems="center" justify="center">
+        <Grid
+          container
+          alignItems="center"
+          justify="center"
+          style={{ height: '140px' }}
+        >
           {numberChips.map((chip, id) =>
-            <Grid item key={ id }>
+            <Grid item key={ id } style={{ width: '20%' }}>
               <NumberChip
                 number={ chip.number }
                 inUse={ !!chip.inUse }

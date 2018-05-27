@@ -33,7 +33,10 @@ function numberChip(props) {
 }
 
 numberChip.propTypes = {
-  number: PropTypes.number.isRequired,
+  number: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]).isRequired,
   inUse: PropTypes.bool,
   used: PropTypes.bool,
   clickHandler: PropTypes.func
