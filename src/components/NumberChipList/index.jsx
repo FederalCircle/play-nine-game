@@ -1,24 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
-import Card from '../Card';
+import Card from '../Card'
 import NumberChip from '../NumberChip'
 import './NumberChipList.css'
 
-function numberChipList(props) {
-  const numberChips = [
-    { number: 1 },
-    { number: 2 },
-    { number: 3, inUse: true },
-    { number: 4, used: true },
-    { number: 5 },
-    { number: 6 },
-    { number: 7 },
-    { number: 8 },
-    { number: 9 },
-    { number: 10 }
-  ]
-
+function numberChipList({ numberChips }) {
   return (
     <div className="NumberChipList">
       <Card>
@@ -42,6 +29,18 @@ function numberChipList(props) {
       </Card>
     </div>
   )
+}
+
+numberChipList.propTypes = {
+  numberChips: PropTypes.arrayOf(PropTypes.shape({
+    number: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
+    inUse: PropTypes.bool,
+    used: PropTypes.bool,
+    clickHandler: PropTypes.func
+  }))
 }
 
 export default numberChipList

@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline'
-import Grid from '@material-ui/core/Grid'
-import StarList from '../../components/StarList'
-import NumberChipList from '../../components/NumberChipList'
-import './App.css';
+import PlayNineLayout from '../../components/PlayNineLayout'
+import './App.css'
 
 class App extends Component {
+  state = {
+    starsQty: 1 + Math.floor(Math.random() * 10), // Random (1~10)
+    numberChips: [...Array(10)].map( (v,k) => ({ number: k+1 }) ), // [1,2..10]
+    selectedChips: []
+  }
+
   render() {
     return (
       <div className="App">
         <CssBaseline />
-        <Grid container direction="column" justify="space-between">
-          <Grid item>
-            <StarList quantity={ 5 }/>
-          </Grid>
-          <Grid item>
-            <NumberChipList />
-          </Grid>
-        </Grid>
+        <PlayNineLayout {...this.state} />
       </div>
     );
   }
