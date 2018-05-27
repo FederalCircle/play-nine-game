@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@material-ui/core/CssBaseline'
+import Grid from '@material-ui/core/Grid'
+import StarList from '../../components/StarList'
+import NumberChipList from '../../components/NumberChipList'
 import './App.css';
 
 class App extends Component {
@@ -7,7 +10,14 @@ class App extends Component {
     return (
       <div className="App">
         <CssBaseline />
-        <h1>Play Nine</h1>
+        <Grid container direction="column" justify="space-between">
+          <Grid item>
+            <StarList quantity={ 5 }/>
+          </Grid>
+          <Grid item>
+            <NumberChipList />
+          </Grid>
+        </Grid>
       </div>
     );
   }
