@@ -5,7 +5,7 @@ import Card from '../Card'
 import NumberChip from '../NumberChip'
 import './NumberChipList.css'
 
-function numberChipList({ numberChips }) {
+function numberChipList({ numberChips, chipClick }) {
   return (
     <div className="NumberChipList">
       <Card>
@@ -13,7 +13,7 @@ function numberChipList({ numberChips }) {
           container
           alignItems="center"
           justify="center"
-          style={{ height: '140px' }}
+          style={{ minHeight: '70px' }}
         >
           {numberChips.map((chip, id) =>
             <Grid item key={ id } style={{ width: '20%' }}>
@@ -21,7 +21,7 @@ function numberChipList({ numberChips }) {
                 number={ chip.number }
                 inUse={ !!chip.inUse }
                 used={ !!chip.used }
-                clickHandler={ (n) => console.log(n) }
+                clickHandler={ chipClick }
               />
             </Grid>
           )}
@@ -32,15 +32,7 @@ function numberChipList({ numberChips }) {
 }
 
 numberChipList.propTypes = {
-  numberChips: PropTypes.arrayOf(PropTypes.shape({
-    number: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]).isRequired,
-    inUse: PropTypes.bool,
-    used: PropTypes.bool,
-    clickHandler: PropTypes.func
-  }))
+  numberChips: PropTypes.array
 }
 
 export default numberChipList

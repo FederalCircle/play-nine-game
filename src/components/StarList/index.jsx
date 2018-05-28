@@ -13,7 +13,7 @@ function starList({ quantity }) {
           container
           alignItems="center"
           justify="center"
-          style={{ height: '140px' }}
+          style={{ minHeight: '140px' }}
         >
           {[ ...Array(quantity) ].map((value, id) =>
             <Grid item key={ id } style={{ width: '20%' }}>

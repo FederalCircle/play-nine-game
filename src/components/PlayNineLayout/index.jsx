@@ -2,36 +2,70 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Grid from '@material-ui/core/Grid'
 import Icon from '@material-ui/core/Icon'
+import Modal from '../Modal'
 import Button from '../Button'
 import StarList from '../StarList'
 import NumberChipList from '../NumberChipList'
+import './PlayNineLayout.css'
 
 function playNineLayout(props) {
   const {
     starsQty,
     selectedChips,
-    numberChips
+    numberChips,
+    refreshCount,
+    modalType,
+    modalOpen,
+    selectedChipClick,
+    numberChipClick,
+    refreshClick,
+    submitClick,
+    play
   } = props
 
+  const maxWidth = '600px'
+
   return (
-    <Grid container direction="column" justify="space-between">
-      <StarList quantity={ starsQty }/>
-      <Grid container
+    <Grid className="PlayNineLayout" container justify="center">
+      <Modal open={ modalOpen } modalType={ modalType } onClose={ play }/>
+      <Grid
+        item
+        container
         direction="column"
         justify="space-between"
-        style={{ height: '64%' }}
+        style={{ maxWidth }}
       >
-        <NumberChipList numberChips={ selectedChips }/>
-        <Grid container justify="space-around">
-          <Button>
-            <span>5</span>
-            <Icon>refresh</Icon>
-          </Button>
-          <Button>
-            <Icon>check</Icon>
-          </Button>
+        <StarList quantity={ starsQty }/>
+        <Grid container
+          direction="column"
+          justify="space-between"
+          style={{ height: '64%' }}
+        >
+          <NumberChipList
+            numberChips={ selectedChips }
+            chipClick={ selectedChipClick }
+          />
+          <Grid container justify="space-around">
+            <Button
+              onClick={ refreshCount === 0? play : refreshClick }
+            >
+              { refreshCount === 0?
+                'RESET' :
+                <div>
+                  <span style={{verticalAlign: 'super'}}>{ refreshCount }</span>
+                  <Icon>refresh</Icon>
+                </div>
+              }
+            </Button>
+            <Button onClick={ submitClick }>
+              <Icon>check</Icon>
+            </Button>
+          </Grid>
+          <NumberChipList
+            numberChips={ numberChips }
+            chipClick={ numberChipClick }
+          />
         </Grid>
-        <NumberChipList numberChips={ numberChips }/>
       </Grid>
     </Grid>
   )
@@ -39,24 +73,16 @@ function playNineLayout(props) {
 
 playNineLayout.propTypes = {
   starsQty: PropTypes.number,
-  selectedChips: PropTypes.arrayOf(PropTypes.shape({
-    number: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]).isRequired,
-    inUse: PropTypes.bool,
-    used: PropTypes.bool,
-    clickHandler: PropTypes.func
-  })).isRequired,
-  numberChips: PropTypes.arrayOf(PropTypes.shape({
-    number: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
-    ]).isRequired,
-    inUse: PropTypes.bool,
-    used: PropTypes.bool,
-    clickHandler: PropTypes.func
-  })).isRequired
+  selectedChips: PropTypes.array.isRequired,
+  numberChips: PropTypes.array.isRequired,
+  refreshCount: PropTypes.number.isRequired,
+  modalType: PropTypes.string.isRequired,
+  modalOpen: PropTypes.bool.isRequired,
+  selectedChipClick: PropTypes.func,
+  numberChipClick: PropTypes.func,
+  refreshClick: PropTypes.func.isRequired,
+  submitClick: PropTypes.func.isRequired,
+  play: PropTypes.func.isRequired
 }
 
 export default playNineLayout
